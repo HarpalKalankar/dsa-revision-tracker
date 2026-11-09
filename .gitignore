@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+venv/
+.venv/
+__pycache__/
+
+# Environment Variables
+.env
+.env.local
+
+# IDE & System Files
+.vscode/
+.idea/
+.DS_Store
+
