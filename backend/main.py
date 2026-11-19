@@ -1,15 +1,14 @@
 from fastapi import Depends, FastAPI
 from sqlalchemy import text
 from sqlalchemy.orm import Session
-app = FastAPI()
-@app.get("/")
-async def read_root():
-    return {"Hello": "World"}
-
 
 from database import get_db
+from routers import auth
 
-app = FastAPI()
+app = FastAPI(title="DSA Revision Tracker")
+
+app.include_router(auth.router)
+
 
 
 @app.get("/")
