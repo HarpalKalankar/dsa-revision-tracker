@@ -15,7 +15,15 @@ export async function api(path, { method = "GET", body, form } = {}) {
     payload = JSON.stringify(body);
   }
 
-  const response = await fetch(`${API_URL}${path}`, { method, headers, body: payload });
+  let response;
+  try {
+    response = await fetch(`${API_URL}${path}`, { method, headers, body: payload });
+  } catch {
+    // No answer at all: backend stopped, wrong VITE_API_URL, or blocked by CORS
+    throw new Error(
+      `Can't reach the server at ${API_URL}. Check the backend is running, then press F12 and read the Console tab.`
+    );
+  }
 
   // Token expired or invalid: log out and go back to the login screen
   if (response.status === 401 && token) {

@@ -11,8 +11,11 @@ from routers import auth, problems, revisions, stats
 app = FastAPI(title="DSA Revision Tracker")
 
 # Which websites may call this API from a browser.
-# Locally that's Vite's dev server. On Render, set FRONTEND_ORIGINS.
-origins = os.environ.get("FRONTEND_ORIGINS", "http://localhost:5173").split(",")
+# Locally that's Vite's dev server, opened as localhost or 127.0.0.1.
+# On Render, set FRONTEND_ORIGINS.
+origins = os.environ.get(
+    "FRONTEND_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"
+).split(",")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[origin.strip() for origin in origins],
