@@ -3,13 +3,13 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from database import get_db
-from routers import auth, problems
+from routers import auth, problems, revisions
 
 app = FastAPI(title="DSA Revision Tracker")
 
-
 app.include_router(auth.router)
 app.include_router(problems.router)
+app.include_router(revisions.router)
 
 
 @app.get("/")
